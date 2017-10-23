@@ -20,7 +20,7 @@ def get_smallest_bar(parsed_json_data):
 
 
 def distance_counter(lat1, lon1, lat2, lon2):
-    r = 6373.0  # Earth radius in km
+    earth_radius = 6373.0
 
     dlon = lon2 - lon1
     dlat = lat2 - lat1
@@ -28,7 +28,7 @@ def distance_counter(lat1, lon1, lat2, lon2):
     a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-    distance = r * c
+    distance = earth_radius * c
 
     return distance
 
