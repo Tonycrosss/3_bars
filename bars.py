@@ -1,6 +1,6 @@
 import json
 import sys
-from math import sin, cos, sqrt, atan2, radians
+from math import sin, cos, sqrt, atan2
 
 
 def load_data(filepath):
