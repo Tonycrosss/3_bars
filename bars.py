@@ -4,8 +4,8 @@ from math import sin, cos, sqrt, atan2
 
 
 def load_data(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        parsed_json_data = json.load(f)
+    with open(filepath, 'r', encoding='utf-8') as file_handler:
+        parsed_json_data = json.load(file_handler)
     return parsed_json_data
 
 
@@ -43,18 +43,18 @@ def get_closest_bar(parsed_json_data, longitude, latitude):
 
 if __name__ == '__main__':
     filepath = sys.argv[1]
-    temp_data = load_data(filepath)
+    parsed_json = load_data(filepath)
     print('Самый большой бар:\n')
-    print(get_biggest_bar(temp_data))
+    print(get_biggest_bar(parsed_json))
     print('\n')
     print('Самый маленький бар:\n')
-    print(get_smallest_bar(temp_data))
+    print(get_smallest_bar(parsed_json))
     print('\n')
     print('Чтобы узнать ближайший бар - укажите координаты:')
     lat2 = float(input('Введите ширину:\n'))
     lon2 = float(input('Введите долготу:\n'))
     print('Самый близкий бар:\n')
-    print(get_closest_bar(temp_data, lat2, lon2))
+    print(get_closest_bar(parsed_json, lat2, lon2))
 
 
 
