@@ -11,12 +11,16 @@ def load_data(filepath):
 
 def get_biggest_bar(parsed_json_data):
     return max(parsed_json_data['features'],
-               key=lambda x: x['properties']['Attributes']['SeatsCount'])
+               key=lambda x: x['properties']
+               ['Attributes']
+               ['SeatsCount'])['properties']['Attributes']['Name']
 
 
 def get_smallest_bar(parsed_json_data):
     return min(parsed_json_data['features'],
-               key=lambda x: x['properties']['Attributes']['SeatsCount'])
+               key=lambda x: x['properties']
+               ['Attributes']
+               ['SeatsCount'])['properties']['Attributes']['Name']
 
 
 def distance_counter(lat1, lon1, lat2, lon2):
@@ -34,27 +38,26 @@ def distance_counter(lat1, lon1, lat2, lon2):
 
 
 def get_closest_bar(parsed_json_data, longitude, latitude):
-    return min(parsed_json_data['features'],
-               key=lambda x: distance_counter(x['geometry']['coordinates'][0],
-                                              x['geometry']['coordinates'][1],
-                                              longitude,
-                                              latitude))
+    closest_bar_params = min(parsed_json_data['features'],
+                             key=lambda x: distance_counter
+                             (x['geometry']['coordinates'][0],
+                              x['geometry']['coordinates'][1],
+                              longitude,
+                              latitude))
+    return closest_bar_params['properties']['Attributes']['Name']
 
 
 if __name__ == '__main__':
     filepath = sys.argv[1]
     parsed_json = load_data(filepath)
-    print('Самый большой бар:\n')
+    print('Самый большой бар:')
     print(get_biggest_bar(parsed_json))
     print('\n')
-    print('Самый маленький бар:\n')
+    print('Самый маленький бар:')
     print(get_smallest_bar(parsed_json))
     print('\n')
     print('Чтобы узнать ближайший бар - укажите координаты:')
     lat2 = float(input('Введите ширину:\n'))
     lon2 = float(input('Введите долготу:\n'))
-    print('Самый близкий бар:\n')
+    print('Самый близкий бар:')
     print(get_closest_bar(parsed_json, lat2, lon2))
-
-
-
